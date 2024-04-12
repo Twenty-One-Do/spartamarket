@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 def post(request):
-    return render(request, "post.html")
+    return render(request, "products/post.html")
 
 def write(request):
-    return render(request, "write.html")
+    return render(request, "products/write.html")
