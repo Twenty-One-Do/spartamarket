@@ -1,4 +1,50 @@
-{% extends "base.html" %}
-
-{% block contents %}
+{% extends "base.html" %} {% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'follower/follower.css' %}" />
+{% endblock style %} {% block contents %}
+<div class="my_info_div">
+  <div class="my_image">
+    {% if user.profile_image == "" %}
+    <img id="profile_img_a" src="{% static 'post/basic_post_image.webp' %}" />
+    {% else %}
+    <img id="profile_img_a" src="{{ user.profile_image.url }}" />
+    {% endif %}
+  </div>
+  <div class="my_info">
+    <div class="my_name">{{ request.user.username }}</div>
+    <div class="my_join_date">가입일:{{ request.user.date_joined }}</div>
+    <div class="my_login_date">최근 접속일:{{ request.user.last_login }}</div>
+    <div class="my_follow_info">
+      <div class="my_following_num">
+        <a href="{% url 'accounts:following' %}"> 팔로윙 </a>
+        : {{ user.following_num }}
+      </div>
+      <div class="my_follower_num">
+        <a href="{% url 'accounts:follower' %}"> 팔로워 </a>
+        : {{ user.follower_num }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="follow_info">
+  <div class="title">내가 팔로우한 유저</div>
+  <div class="follow_card_container">
+    {% for following in followings %}
+    <div class="writer_div">
+      <div class="writer_info">
+        <div class="writer_profile">
+          {% if following.profile_image == "" %}
+          <img src="{% static 'post/basic_post_image.webp' %}" />
+          {% else %}
+          <img src="{{ following.profile_image.url }}" />
+          {% endif %}
+        </div>
+        <div>
+          <p class="writer_name">{{ following.user.username }}</p>
+          <p>팔로워: {{ following.follower_num }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock contents %}

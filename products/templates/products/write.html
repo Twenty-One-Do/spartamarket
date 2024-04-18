@@ -1,4 +1,26 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'write/write.css' %}" />
+<meta name="csrf-token" content="{{ csrf_token }}" />
+{% endblock style %} {% block contents %}
+<form action="{% url 'products:write' %}" method="POST" class="write_form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form_title"><p>이미지</p></div>
+  <div class="image">{{ form.image }}</div>
 
-{% block contents %}
-{% endblock contents %}
+  <div class="form_title"><p>제목</p></div>
+  <div class="title">{{ form.title }}</div>
+
+  <div class="form_title"><p>내용</p></div>
+  <div class="body">{{ form.body }}</div>
+
+  <div class="form_title"><p>태그</p></div>
+  <div class="tags_container">
+    <input class="tags" name="tags" />
+  </div>
+  <div class="btn_container">
+    <button type="submit" class="write_btn">작성</button>
+  </div>
+</form>
+{% endblock contents %} {% block script %}
+<script src="{% static 'post/post.js' %}"></script>
+{% endblock script %}

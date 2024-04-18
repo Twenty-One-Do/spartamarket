@@ -1,0 +1,266 @@
+.my_info_div {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.my_info_div .my_image {
+  width: 330px;
+  height: 100%;
+  background-color: white;
+}
+
+.my_info_div .my_image img {
+  width: 272px;
+  height: 272px;
+  margin: 5% 5%;
+  border-radius: 100%;
+  background-color: white;
+}
+
+.my_info_div .my_info {
+  width: 68%;
+  padding: 2%;
+}
+.my_info_div .my_info .my_name {
+  width: 100%;
+  padding-bottom: 30px;
+  font-size: 35px;
+}
+.my_info_div .my_info .my_join_date {
+  width: 100%;
+  padding-top: 10px;
+  font-size: 20px;
+}
+.my_info_div .my_info .my_login_date {
+  width: 100%;
+  padding-top: 10px;
+  font-size: 20px;
+}
+.my_info_div .my_info .my_follow_info {
+  width: 60%;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+}
+.my_info_div .my_info .my_follow_info a {
+  color: var(--accent-color);
+}
+.my_info_div .my_info .my_follow_info .my_following_num {
+  width: 100%;
+  font-size: 20px;
+}
+.my_info_div .my_info .my_follow_info .my_follower_num {
+  width: 100%;
+  font-size: 20px;
+}
+.title {
+  padding: 10px;
+  color: var(--accent-color);
+  font-size: 23px;
+}
+.my_post_div {
+  width: 100%;
+  height: 420px;
+}
+.my_like_div {
+  width: 100%;
+  height: 420px;
+}
+.my_view_div {
+  width: 100%;
+  height: 420px;
+}
+.user_delete {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_container {
+  width: 100%;
+  height: 320px;
+  background-color: white;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card_container span {
+  margin-top: 140px;
+  font-size: 35px;
+  color: var(--accent-color);
+}
+
+.post-card {
+  width: 220px;
+  height: 300px;
+  background-color: white;
+  border: 1px solid var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  border-radius: 3%;
+  padding: 0px;
+  margin: 10px;
+  transition: background-color 0.3s ease, width 0.5s ease;
+  box-shadow: 2px 2px 8px 1px rgb(158, 158, 158);
+}
+
+.post-card:hover {
+  background-color: var(--accent-color);
+}
+
+.post-card img {
+  width: 100%;
+  height: 70%;
+  border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
+  border-bottom: 1px solid var(--accent-color);
+}
+
+.post-card .product_description {
+  width: 96%;
+  height: 30%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.post-card .product_description .product_title {
+  text-align: left;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.post-card .product_description .product_date {
+  text-align: right;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  margin-left: 7px;
+}
+
+.post-card .product_description .product_info {
+  text-align: right;
+  margin-top: 0px;
+  margin-right: 5px;
+}
+
+.pagination {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.pagination .step-links {
+  display: inline-block;
+}
+
+.pagination .step-links a {
+  color: var(--accent-color);
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.pagination .step-links .current {
+  padding: 5px 10px;
+}
+
+.pagination .step-links span {
+  margin-right: 10px;
+}
+
+.user_delete_form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+  align-items: right;
+}
+.user_delete_form button {
+  border: 1px solid var(--warning-color);
+  background-color: white;
+  margin-top: 10px;
+  margin-right: 10px;
+  color: var(--warning-color);
+  font-family: inherit;
+  font-size: 20px;
+  border-radius: 5%;
+  width: 100px;
+  height: 30px;
+  transition: 0.3s;
+}
+
+.user_delete_form button:hover {
+  border: 1px solid black;
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.user_update_form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+  align-items: right;
+}
+.user_update_form button {
+  border: 1px solid var(--accent-color);
+  background-color: white;
+  margin-top: 10px;
+  margin-right: 10px;
+  color: var(--accent-color);
+  font-family: inherit;
+  font-size: 20px;
+  border-radius: 5%;
+  width: 100px;
+  height: 30px;
+  transition: 0.3s;
+}
+
+.user_update_form button:hover {
+  border: 1px solid black;
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.my_image {
+  position: relative;
+  width: fit-content;
+}
+
+.my_image button {
+  background-color: white;
+  border: none;
+  width: 100%;
+  display: block; /* Remove extra space below the image */
+}
+
+.my_image img {
+  display: block; /* Remove extra space below the image */
+}
+
+.overlay {
+  position: absolute;
+  pointer-events: none;
+  color: var(--accent-color);
+  font-size: 30px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.my_image:hover .overlay {
+  opacity: 1;
+}

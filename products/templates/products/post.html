@@ -1,4 +1,78 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'post/post.css' %}" />
+<meta name="csrf-token" content="{{ csrf_token }}" />
+{% endblock style %} {% block contents %}
+<div class="image">
+  {% if post.image == "" %}
+  <img src="{% static 'post/basic_post_image.webp' %}" />
+  {% else %}
+  <img src="{{ post.image.url }}" />
+  {% endif %}
+</div>
+<div class="writer_div">
+  <div class="writer_info">
+    <div class="writer_profile">
+      {% if writer.profile_image == "" %}
+      <img src="{% static 'post/basic_post_image.webp' %}" />
+      {% else %}
+      <img src="{{ writer.profile_image.url }}" />
+      {% endif %}
+    </div>
+    <div>
+      <p class="writer_name">{{ writer.user.username }}</p>
+      <p>팔로워: {{ writer.follower_num }}</p>
+    </div>
+  </div>
+  {% if request.user.is_authenticated and request.user.userprofile != post.user_id %} 
+  <form action="{% url 'accounts:follow' post.user_id_id %}" method="POST" class="follow_btn">
+    {% csrf_token %}
+    {% if follow_user %}
+    <button type="submit">언팔로우</button>
+    {% else %}
+    <button type="submit">팔로우</button>
+    {% endif %}
+  </form>
+  {% endif %}
+</div>
+<div class="title">{{ post.title }}</div>
+<div class="body">{{ post.body }}</div>
+<div class="tags">
+  {% for tag in tags %}
+  <div class="tag_box">#{{ tag.tag_id.name }}</div>
+  {% endfor %}
+</div>
+<div class="post_info">
+  <div class="post_state">
+    <div class="post_time">
+      <p>{{ post.created_at }}</p>
+    </div>
+    <div class="post_interact">
+      <p id="like_num">찜수: {{ post.likes_num }} |</p>
+      <p>| 조회: {{ post.views_num }}</p>
+    </div>
+  </div>
 
-{% block contents %}
-{% endblock contents %}
+  <div class="post_oper">
+    {% if request.user.is_authenticated %} 
+    {% if request.user.userprofile == post.user_id %}
+    <form action="{% url 'products:delete' post.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="delete_btn">삭제</button>
+    </form>
+    {% endif %}
+    <form action="">
+      <button
+        onclick="push_likes_btn(event)"
+        type="button"
+        post_id="{{ post.id }}"
+        class="like_btn"
+      >
+        찜
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock contents %} {% block script %}
+<script src="{% static 'post/post.js' %}"></script>
+{% endblock script %}

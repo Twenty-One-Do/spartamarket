@@ -1,4 +1,27 @@
-{% extends "base.html" %}
-
-{% block contents %}
-{% endblock contents %}
+{% extends "base.html" %} {% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'main/main.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock style %} {% block contents %}
+<div id="sort_by_q" sort_by="{{ sort_by_q }}"></div>
+<div class="sort-div">
+  <div class="sort_description">
+    <p>{{ sort_by }}</p>
+    <p>{{ sort_by_desc }}</p>
+  </div>
+  <div class="sort_option">
+    <a href="{% url 'main:home' 'popular' %}">인기순</a>
+    <a href="{% url 'main:home' 'latest' %}">최신순</a>
+    <a href="{% url 'main:home' 'old' %}">오래된순</a>
+    <a href="{% url 'main:home' 'views' %}">조회순</a>
+  </div>
+</div>
+<div class="search-div">
+  <input id="search_inp" class="search_inp" />
+  <img src="{% static 'main/search_icon.png' %}" />
+</div>
+<div id="post-div" class="posts-div">
+  {% block cards %} {% endblock cards %}
+</div>
+{% endblock contents %} {% block script %}
+<script src="{% static 'main/main.js' %}"></script>
+{% endblock script %}

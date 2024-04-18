@@ -1,0 +1,19 @@
+{% load static %}
+{% for post in posts %}
+<a href="{% url 'products:post' post.id %}" id="{{ post.id }}">
+  <div class="post-card">
+    {% if post.image != "" %}
+    <img src="{{ post.image.url }}" />
+    {% else %}
+    <img src="{% static 'post/basic_post_image.webp' %}" />
+    {% endif %}
+    <div class="product_description">
+      <p class="product_title">{{ post.title }}</p>
+      <p class="product_date">{{ post.updated_at }}</p>
+      <p class="product_info">
+        조회수: {{post.views_num}} 찜: {{ post.likes_num }}
+      </p>
+    </div>
+  </div>
+</a>
+{% endfor %}

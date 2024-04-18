@@ -1,4 +1,18 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'login/login.css' %}" />
+{% endblock style %} {% block contents %}
 
-{% block contents %}
+<form action="{% url 'accounts:login' %}" method="POST" class="login_form">
+  {% csrf_token %}
+  <div class="login_form_div">
+    {% for field in form %}
+    <p>{{ field.label_tag }} {{ field }}</p>
+    {% endfor %}
+    <button type="submit" class="login_btn">로그인</button>
+  </div>
+  <a class="login_to_join" href="{% url 'accounts:join' %}"
+    >회원이 아니신가요?</a
+  >
+</form>
+
 {% endblock contents %}

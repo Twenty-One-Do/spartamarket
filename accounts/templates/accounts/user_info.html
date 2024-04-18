@@ -1,4 +1,185 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'user_info/user_info.css' %}" />
+<meta name="csrf-token" content="{{ csrf_token }}" />
+{% endblock style %} {% block contents %}
 
-{% block contents %}
-{% endblock contents %}
+<div class="my_info_div">
+  <div class="my_image">
+    <input type="file" id="file-input" style="display: none" />
+    {% if user.profile_image == "" %}
+    <button id="img_btn" type="button">
+      <img id="profile_img_b" src="{% static 'post/basic_post_image.webp' %}" />
+    </button>
+    {% else %}
+    <button id="img_btn" type="button">
+      <img id="profile_img_b" src="{{ user.profile_image.url }}" />
+    </button>
+    {% endif %}
+    <div class="overlay">이미지 수정</div>
+  </div>
+  <div class="my_info">
+    <div class="my_name">{{ request.user.username }}</div>
+    <div class="my_join_date">가입일:{{ request.user.date_joined }}</div>
+    <div class="my_login_date">최근 접속일:{{ request.user.last_login }}</div>
+    <div class="my_follow_info">
+      <div class="my_following_num">
+        <a href="{% url 'accounts:following' %}"> 팔로윙 </a>
+        : {{ user.following_num }}
+      </div>
+      <div class="my_follower_num">
+        <a href="{% url 'accounts:follower' %}"> 팔로워 </a>
+        : {{ user.follower_num }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="my_post_div">
+  <div class="title">내가 올린 물건</div>
+  <div class="card_container">
+    {% if users_posts|length == 0 %}
+    <span>올린 물건이 없습니다!</span>
+    {% else %} {% for post in users_posts %}
+    <a href="{% url 'products:post' post.id %}" id="{{ post.id }}">
+      <div class="post-card">
+        {% if post.image != "" %}
+        <img src="{{ post.image.url }}" />
+        {% else %}
+        <img src="{% static 'post/basic_post_image.webp' %}" />
+        {% endif %}
+        <div class="product_description">
+          <p class="product_title">{{ post.title }}</p>
+          <p class="product_date">{{ post.updated_at }}</p>
+          <p class="product_info">
+            조회수: {{post.views_num}} 찜: {{ post.likes_num }}
+          </p>
+        </div>
+      </div>
+    </a>
+    {% endfor %} {% endif %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+      {% if users_posts.has_previous %}
+      <a href="?page_mypost=1">&laquo; 처음으로</a>
+      <a href="?page_mypost={{ users_posts.previous_page_number }}">이전</a>
+      {% endif %}
+      <span class="current">
+        {{ users_posts.number }} / {{ users_posts.paginator.num_pages }}
+      </span>
+      {% if users_posts.has_next %}
+      <a href="?page_mypost={{ users_posts.next_page_number }}">다음</a>
+      <a href="?page_mypost={{ users_posts.paginator.num_pages }}"
+        >마지막으로 &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+</div>
+<div class="my_like_div">
+  <div class="title">내가 찜한 물건</div>
+  <div class="card_container">
+    {% if users_likes|length == 0 %}
+    <span>찜한 물건이 없습니다!</span>
+    {% else %} {% for post in users_likes %}
+    <a href="{% url 'products:post' post.id %}" id="{{ post.id }}">
+      <div class="post-card">
+        {% if post.image != "" %}
+        <img src="{{ post.image.url }}" />
+        {% else %}
+        <img src="{% static 'post/basic_post_image.webp' %}" />
+        {% endif %}
+        <div class="product_description">
+          <p class="product_title">{{ post.title }}</p>
+          <p class="product_date">{{ post.updated_at }}</p>
+          <p class="product_info">
+            조회수: {{post.views_num}} 찜: {{ post.likes_num }}
+          </p>
+        </div>
+      </div>
+    </a>
+    {% endfor %} {% endif %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+      {% if users_likes.has_previous %}
+      <a href="?page_mylike=1">&laquo; 처음으로</a>
+      <a href="?page_mylike={{ users_likes.previous_page_number }}">이전</a>
+      {% endif %}
+      <span class="current">
+        {{ users_likes.number }} / {{ users_likes.paginator.num_pages }}
+      </span>
+      {% if users_likes.has_next %}
+      <a href="?page_mylike={{ users_likes.next_page_number }}">다음</a>
+      <a href="?page_mylike={{ users_likes.paginator.num_pages }}">
+        마지막으로 &raquo;
+      </a>
+      {% endif %}
+    </span>
+  </div>
+</div>
+<div class="my_view_div">
+  <div class="title">최근 본 물건</div>
+  <div class="card_container">
+    {% if users_views|length == 0 %}
+    <span>올린 물건이 없습니다!</span>
+    {% else %} {% for view in users_views %}
+    <a
+      href="{% url 'products:post' view.post_id.id %}"
+      id="{{ view.post_id.id }}"
+    >
+      <div class="post-card">
+        {% if view.post_id.image != "" %}
+        <img src="{{ view.post_id.image.url }}" />
+        {% else %}
+        <img src="{% static 'post/basic_post_image.webp' %}" />
+        {% endif %}
+        <div class="product_description">
+          <p class="product_title">{{ view.post_id.title }}</p>
+          <p class="product_date">{{ view.post_id.updated_at }}</p>
+          <p class="product_info">
+            조회수: {{view.post_id.views_num}} 찜: {{ view.post_id.likes_num }}
+          </p>
+        </div>
+      </div>
+    </a>
+    {% endfor %} {% endif %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+      {% if users_views.has_previous %}
+      <a href="?page_myview=1">&laquo; 처음으로</a>
+      <a href="?page_myview={{ users_views.previous_page_number }}">이전</a>
+      {% endif %}
+      <span class="current">
+        {{ users_views.number }} / {{ users_views.paginator.num_pages }}
+      </span>
+      {% if users_views.has_next %}
+      <a href="?page_myview={{ users_views.next_page_number }}">다음</a>
+      <a href="?page_myview={{ users_views.paginator.num_pages }}"
+        >마지막으로 &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+</div>
+<div class="user_delete">
+  <form
+    action="{% url 'accounts:userinfo' %}"
+    method="POST"
+    class="user_update_form"
+  >
+    {% csrf_token %}
+    <button type="submit">정보수정</button>
+  </form>
+  <form
+    action="{% url 'accounts:delete' %}"
+    method="POST"
+    class="user_delete_form"
+  >
+    {% csrf_token %}
+    <button type="submit">회원탈퇴</button>
+  </form>
+</div>
+{% endblock contents %} {% block script %}
+<script src="{% static 'user_info/user_info.js' %}"></script>
+{% endblock script %}
