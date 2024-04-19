@@ -20,13 +20,13 @@
 - 정렬 가능
 - 무한 스크롤(아래로 스크롤 시 페이지 자동 갱신) 가능
 
-### 회원 CUD 기능
+### 회원 CRUD 기능
 ![image](https://github.com/Twenty-One-Do/spartamarket/assets/156996387/c6cc7300-0d20-406f-9fe0-116482481d18)
 ![image](https://github.com/Twenty-One-Do/spartamarket/assets/156996387/2d10328b-c43b-4ba2-8266-7e01c10c1f41)
 - 유효성 검사 가능
 - 회원가입시 자동 로그인
 
-### 글 CUD 기능
+### 글 CRD 기능
 ![image](https://github.com/Twenty-One-Do/spartamarket/assets/156996387/f07d80b7-dec0-4f42-ad5b-ab7c1cd31581)
 ![image](https://github.com/Twenty-One-Do/spartamarket/assets/156996387/e2805bd8-e02a-4367-9d34-d4926e9142ba)
 - 사진 업로드 및 태그 가능
