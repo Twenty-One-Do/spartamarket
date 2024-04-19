@@ -12,6 +12,9 @@
 - FE: HTML, CSS, JS
 - BE: Django, SQLite
 
+![image](https://github.com/Twenty-One-Do/spartamarket/assets/156996387/0c503318-95b8-4d0d-a54b-90addb5a1e97)
+
+
 ## ✅주요 기능
 
 ### 메인 화면
